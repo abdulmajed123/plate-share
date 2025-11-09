@@ -110,15 +110,15 @@ const Navbar = () => {
               </li>
 
               <li>
-                <Link to={"/my-models"}>Add Food</Link>
+                <Link to={"/add-food"}>Add Food</Link>
               </li>
 
               <li>
-                <Link to={"/my-downloads"}>My Manage Foods</Link>
+                <Link to={"/manage-my-foods"}>My Manage Foods</Link>
               </li>
 
               <li>
-                <Link>My Food Requests </Link>
+                <Link to={"/my-foods-request"}>My Food Requests </Link>
               </li>
               <li>
                 <button
