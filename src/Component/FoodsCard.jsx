@@ -1,5 +1,6 @@
 import React, { use } from "react";
 import { AuthContext } from "../Provider/AuthContext";
+import { Link } from "react-router";
 
 const FoodsCard = ({ food }) => {
   const { user } = use(AuthContext);
@@ -52,9 +53,12 @@ const FoodsCard = ({ food }) => {
         </div>
 
         <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-700 flex justify-center">
-          <button className="w-full px-4 py-2 rounded-xl font-medium shadow-sm bg-indigo-600 text-white hover:bg-indigo-700 transition">
+          <Link
+            to={`/food-details/${food._id}`}
+            className="w-full px-4 py-2 rounded-xl font-medium shadow-sm bg-indigo-600 text-white hover:bg-indigo-700 transition text-center"
+          >
             View Details
-          </button>
+          </Link>
         </div>
       </article>
     </div>

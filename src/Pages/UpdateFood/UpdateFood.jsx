@@ -1,12 +1,9 @@
-import React, { use } from "react";
-import { AuthContext } from "../../Provider/AuthContext";
-import { toast } from "react-toastify";
+import React from "react";
 
-const AddFoods = () => {
-  const { user } = use(AuthContext);
-
-  const handleSubmit = (e) => {
+const UpdateFood = () => {
+  const handleFoodUpdateSubmit = (e) => {
     e.preventDefault();
+
     const formData = {
       food_name: e.target.foodName.value,
       food_image: e.target.imageUrl.value,
@@ -14,39 +11,16 @@ const AddFoods = () => {
       pickup_location: e.target.pickupLocation.value,
       expire_date: e.target.expireDate.value,
       additional_notes: e.target.notes.value,
-      food_status: "Available",
-      created_at: new Date(),
-      donators_name: user.displayName,
-      donators_email: user.email,
-      donators_image: user.photoURL,
     };
-    console.log({ formData });
-
-    fetch("http://localhost:3000/foods", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        toast.success("Food added successfully! 🥳");
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error("Failed to add food!");
-      });
+    console.log(formData);
   };
-
   return (
     <div class="max-w-xl mx-auto bg-white shadow-lg rounded-2xl p-8 mt-10">
       <h1 class="text-2xl font-bold text-gray-800 text-center mb-2">
         🍱 Food Share — Submit Food
       </h1>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleFoodUpdateSubmit}>
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">
             Food Name
@@ -151,4 +125,4 @@ const AddFoods = () => {
   );
 };
 
-export default AddFoods;
+export default UpdateFood;
