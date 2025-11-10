@@ -1,8 +1,45 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 const MyFoodCard = ({ food }) => {
-  const { food_image, food_name, _id } = food;
+  const navigate = useNavigate();
+  const { food_image, food_name, _id, food_qty } = food;
+
+  const handleDelete = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:3000/foods/${_id}`, {
+          method: "DELETE",
+          headers: {
+            "content-type": "application/json",
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            navigate("/available-foods");
+
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    });
+  };
   return (
     <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl border border-gray-200">
       <div className="md:flex">
@@ -24,7 +61,7 @@ const MyFoodCard = ({ food }) => {
               <strong>📍 Pickup Location:</strong> Melandha
             </li>
             <li>
-              <strong>📦 Quantity:</strong> 5
+              <strong>📦 Quantity:</strong> {food_qty}
             </li>
             <li>
               <strong>📅 Expiry Date:</strong> November 15, 2025
@@ -46,7 +83,10 @@ const MyFoodCard = ({ food }) => {
             >
               Update Food
             </Link>
-            <button className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded">
+            <button
+              onClick={handleDelete}
+              className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded"
+            >
               Delete
             </button>
           </div>
