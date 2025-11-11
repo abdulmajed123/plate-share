@@ -1,6 +1,7 @@
 import React, { use, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../../Provider/AuthContext";
+import { updateProfile } from "firebase/auth";
 import { toast } from "react-toastify";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
@@ -19,6 +20,10 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         const user = result.user;
+        updateProfile(user, {
+          displayName: name,
+          photoURL: photoURL || "https://example.com/default-avatar.png",
+        });
         console.log(user);
         Navigate("/");
         toast.success(" User Create Successfully");

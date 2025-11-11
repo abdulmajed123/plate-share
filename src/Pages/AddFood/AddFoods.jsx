@@ -134,7 +134,6 @@ const AddFoods = () => {
             name="imageUrl"
             type="text"
             placeholder="ImgBB link will appear here"
-            readOnly
             className="w-full border border-gray-300 rounded-lg px-4 py-2 bg-gray-100 text-gray-600"
           />
         </div>
