@@ -1,21 +1,78 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import React, { use, useEffect, useRef, useState } from "react";
+import { useLoaderData, useNavigate, useParams } from "react-router";
+import { AuthContext } from "../../Provider/AuthContext";
 
 const FoodDetails = () => {
+  const { user } = use(AuthContext);
   const { id } = useParams();
   const [food, setFood] = useState([]);
+  // const [requestFood, setRequestFood] = useState([]);
+  const requestData = useLoaderData();
+  console.log(requestData);
 
+  const foodRequestModalRef = useRef(null);
+  const navigate = useNavigate();
   useEffect(() => {
     fetch(`http://localhost:3000/foods/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setFood(data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, [id]);
+
+  const foodRequestModal = () => {
+    foodRequestModalRef.current.showModal();
+  };
+
+  const handleFoodRequestSubmit = (e) => {
+    e.preventDefault();
+    const formData = {
+      location: e.target.location.value,
+      reason: e.target.reason.value,
+      contact: e.target.contact.value,
+      name: user.displayName,
+      email: user.email,
+      photoURL: user.photoURL,
+      foodId: food._id,
+      status: "Pending",
+      requestDate: new Date(),
+    };
+    console.log(formData);
+
+    fetch("http://localhost:3000/food-request", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        navigate("/available-foods");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  // useEffect(() => {
+  //   fetch(`http://localhost:3000/food-request/${id}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       setRequestFood(data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, [id]);
+
+  // console.log(requestFood);
   return (
     <main className="max-w-4xl mx-auto p-6">
       <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden">
@@ -29,7 +86,7 @@ const FoodDetails = () => {
                 className="w-full h-full object-cover"
               />
               <div className="absolute left-4 top-4 bg-black/60 text-white text-xs px-3 py-1 rounded-md">
-                {food.food_status}
+                {/* {food.food_status} */}
               </div>
               <div className="absolute left-4 bottom-4 bg-white/90 dark:bg-black/70 px-3 py-1 rounded-md text-sm">
                 {/* Expires: {formatDate(food.expire_date)} */}
@@ -80,16 +137,122 @@ const FoodDetails = () => {
               </div>
 
               <div className="flex flex-col items-end gap-2">
-                <button className="px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white font-medium">
+                <button
+                  onClick={foodRequestModal}
+                  className="px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white font-medium"
+                >
                   Request Food
                 </button>
 
-                <button className="text-xs underline text-gray-600 dark:text-gray-300">
-                  Contact Donator
-                </button>
+                <dialog
+                  ref={foodRequestModalRef}
+                  className="modal modal-bottom sm:modal-middle"
+                >
+                  <div className="modal-box">
+                    <h3 className="font-bold text-lg text-center">
+                      Food Request Form
+                    </h3>
+                    <form onSubmit={handleFoodRequestSubmit}>
+                      <fieldset className="fieldset">
+                        <label className="label">Location</label>
+                        <input
+                          type="text"
+                          name="location"
+                          placeholder="Write Location"
+                          className="input input-bordered w-full mb-3"
+                          required
+                        />
+                        <label className="label">Reason</label>
+                        <textarea
+                          name="reason"
+                          placeholder="Why Need Food?"
+                          className="textarea textarea-bordered w-full mb-3"
+                          required
+                        ></textarea>
+                        <label className="label">Contact No</label>
+                        <input
+                          type="number"
+                          name="contact"
+                          placeholder="Contact No."
+                          className="input input-bordered w-full mb-4"
+                          required
+                        />
+
+                        <button className="btn btn-neutral mt-4">Submit</button>
+                      </fieldset>
+                    </form>
+
+                    <div className="modal-action">
+                      <form method="dialog">
+                        {/* if there is a button in form, it will close the modal */}
+                        <button className="btn">Close</button>
+                      </form>
+                    </div>
+                  </div>
+                </dialog>
               </div>
             </section>
           </div>
+        </div>
+      </div>
+      <div className="mt-20">
+        <h2 className="text-2xl font-bold text-center">Request Foods</h2>
+        <div className="overflow-x-auto">
+          <table className="table">
+            {/* head */}
+            <thead>
+              <tr>
+                {/* <th>
+                  <label>
+                    <input type="checkbox" className="checkbox" />
+                  </label>
+                </th> */}
+                <th>Name</th>
+                <th>Location</th>
+                <th>Reason</th>
+                <th>Contact No</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* row 1 */}
+
+              {requestData.map((data) => (
+                <tr>
+                  {/* <th>
+                  <label>
+                    <input type="checkbox" className="checkbox" />
+                  </label>
+                </th> */}
+                  <td>
+                    <div className="flex items-center gap-3">
+                      <div className="avatar">
+                        <div className="mask mask-squircle h-12 w-12">
+                          <img
+                            src={data.photoURL}
+                            alt="Avatar Tailwind CSS Component"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <div className="font-bold">{data.name}</div>
+                        {/* <div className="text-sm opacity-50">{user.email}</div> */}
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <span className="badge badge-ghost badge-sm">
+                      {/* {data.location} */}
+                    </span>
+                  </td>
+                  {/* <td>{data.reason}</td> */}
+                  <th>
+                    {/* <button className="btn btn-ghost btn-xs">{data}</button> */}
+                  </th>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </main>

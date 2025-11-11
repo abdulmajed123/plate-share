@@ -8,7 +8,7 @@ const FoodsCard = ({ food }) => {
     <div>
       <article className="bg-white dark:bg-slate-800 rounded-2xl shadow-md overflow-hidden flex flex-col max-w-sm mx-auto">
         {/* Image */}
-        <div className="h-64 w-full overflow-hidden">
+        <div className="h-44 w-full overflow-hidden">
           <img
             src={food.food_image}
             alt={food.name}
