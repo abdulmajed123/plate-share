@@ -5,7 +5,7 @@ const Banner = () => {
   return (
     <div>
       <section
-        className="relative bg-cover bg-center h-screen"
+        className="relative bg-cover bg-center h-[70vh]"
         style={{
           backgroundImage:
             "url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1470&q=80')",
@@ -24,9 +24,6 @@ const Banner = () => {
             Together, we reduce food waste and help the community.
           </p>
           <div className="flex flex-col md:flex-row gap-4">
-            {/* <button className="bg-yellow-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-yellow-600 transition">
-              Search Food
-            </button> */}
             <Link
               to="/available-foods"
               className="bg-transparent border border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-black transition"

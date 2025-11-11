@@ -54,7 +54,7 @@ const FoodsCard = ({ food }) => {
           <div className="flex justify-center mt-auto">
             <Link
               to={`/food-details/${food._id}`}
-              className="px-6 py-2 w-full rounded-xl font-medium shadow-sm bg-linear-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 text-center"
+              className="btn btn-primary px-6 py-2 w-full hover:text-white  hover:bg-black rounded-xl font-medium shadow-sm  transition-all duration-300 text-center"
             >
               View Details
             </Link>

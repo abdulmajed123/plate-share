@@ -15,3 +15,14 @@
 .animate-fade-in {
   animation: fade-in-up 0.6s ease-out;
 }
+
+.navbar .active {
+  /* width: 50px; */
+  color: white;
+  font-weight: bold;
+  border: 1px solid #cac8c8ff;
+  border-radius: 20px;
+  background: rgb(120, 118, 118);
+  padding-right: 5px;
+  padding-left: 5px;
+}

@@ -41,7 +41,7 @@ const MyFoodCard = ({ food }) => {
     });
   };
   return (
-    <div className="max-w-3xl p-2  md:max-w-4xl mx-auto bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200 animate-fade-in">
+    <div className="max-w-3xl p-2   md:max-w-4xl mx-auto bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200 animate-fade-in">
       <div className="md:flex">
         {/* Image Section */}
         <div className="md:shrink-0 p-3">
