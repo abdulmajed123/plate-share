@@ -184,68 +184,6 @@ const FoodDetails = () => {
       </div>
 
       {user?.email === food?.donators_email && (
-        // <div className="mt-20">
-        //   <h2 className="text-2xl font-bold text-center">Request Foods</h2>
-        //   <div className="overflow-x-auto">
-        //     <table className="table bg-white">
-        //       {/* head */}
-        //       <thead>
-        //         <tr>
-        //           {/* <th>
-        //           <label>
-        //             <input type="checkbox" className="checkbox" />
-        //           </label>
-        //         </th> */}
-        //           <th>Name</th>
-        //           <th>Location</th>
-        //           <th>Reason</th>
-        //           <th>Contact No</th>
-        //           <th>Actions</th>
-        //         </tr>
-        //       </thead>
-        //       <tbody>
-        //         {/* row 1 */}
-
-        //         {requestData.map((data) => (
-        //           <tr>
-        //             {/* <th>
-        //           <label>
-        //             <input type="checkbox" className="checkbox" />
-        //           </label>
-        //         </th> */}
-        //             <td>
-        //               <div className="flex items-center gap-3">
-        //                 <div className="avatar">
-        //                   <div className="mask mask-squircle h-12 w-12">
-        //                     <img
-        //                       src={data.photoURL}
-        //                       alt="Avatar Tailwind CSS Component"
-        //                     />
-        //                   </div>
-        //                 </div>
-        //                 <div>
-        //                   <div className="font-bold">{data.name}</div>
-        //                   <div className="text-sm opacity-50">{data.email}</div>
-        //                 </div>
-        //               </div>
-        //             </td>
-        //             <td>
-        //               <span className="badge badge-ghost badge-sm">
-        //                 {data.location}
-        //               </span>
-        //             </td>
-        //             <td>{data.reason}</td>
-        //             <td>{data.contact}</td>
-        //             <div className="flex items-center gap-2 mt-6">
-        //               <button className="badge badge-primary ">Accept</button>
-        //               <button className="badge badge-secondary">Reject</button>
-        //             </div>
-        //           </tr>
-        //         ))}
-        //       </tbody>
-        //     </table>
-        //   </div>
-        // </div>
         <div className="mt-20 px-4">
           <h2 className="text-3xl font-extrabold text-center text-gray-800 mb-8">
             🍱 Request Foods
@@ -254,7 +192,7 @@ const FoodDetails = () => {
           <div className="overflow-x-auto rounded-2xl shadow-lg border border-gray-200 bg-white">
             <table className="table w-full text-sm text-gray-700">
               {/* Table Head */}
-              <thead className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-base">
+              <thead className="bg-linear-to-r from-blue-500 to-indigo-600 text-white text-base">
                 <tr>
                   <th className="py-3 px-4 text-left">Name</th>
                   <th className="py-3 px-4 text-left">Location</th>

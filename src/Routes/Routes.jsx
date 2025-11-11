@@ -24,15 +24,15 @@ const router = createBrowserRouter([
       {
         path: "/available-foods",
         loader: () => fetch("http://localhost:3000/foods"),
-        element: (
-          <PrivateRoute>
-            <AvailableFoods></AvailableFoods>
-          </PrivateRoute>
-        ),
+        element: <AvailableFoods></AvailableFoods>,
       },
       {
         path: "/food-details/:id",
-        element: <FoodDetails></FoodDetails>,
+        element: (
+          <PrivateRoute>
+            <FoodDetails></FoodDetails>
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:3000/food-request/${params.id}`),
       },
@@ -42,11 +42,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/add-food",
-        element: <AddFoods></AddFoods>,
+        element: (
+          <PrivateRoute>
+            <AddFoods></AddFoods>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/manage-my-foods",
-        element: <MyManageFoods></MyManageFoods>,
+        element: (
+          <PrivateRoute>
+            <MyManageFoods></MyManageFoods>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-foods-request",

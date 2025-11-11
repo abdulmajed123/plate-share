@@ -6,7 +6,7 @@ const FoodsCard = ({ food }) => {
   const { user } = use(AuthContext);
   return (
     <div>
-      <article className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg overflow-hidden flex flex-col max-w-sm mx-auto transform transition-transform duration-500 hover:scale-105 hover:shadow-2xl">
+      <article className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg overflow-hidden flex flex-col max-w-sm mx-auto transform transition-transform animate-fade-in duration-500  hover:scale-105 hover:shadow-2xl">
         {/* Image */}
         <div className="h-48 w-full overflow-hidden relative">
           <img

@@ -1,10 +1,12 @@
 import React, { use, useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/AuthContext";
 import MyFoodCard from "../MyFoodCard/MyFoodCard";
+import Loading from "../Loading/Loading";
 
 const MyManageFoods = () => {
   const { user } = use(AuthContext);
   const [myFoods, setMyFoods] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch(`http://localhost:3000/my-foods?email=${user.email}`)
@@ -12,13 +14,16 @@ const MyManageFoods = () => {
       .then((data) => {
         console.log(data);
         setMyFoods(data);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
       });
   }, [user]);
 
-  console.log(myFoods);
+  if (loading) {
+    return <Loading></Loading>;
+  }
   return (
     <div className="flex flex-col gap-5 py-10">
       {myFoods.map((food) => (

@@ -4,7 +4,7 @@ import { FaHandsHelping, FaPlusCircle, FaSearch } from "react-icons/fa";
 const HowItWorksCard = () => {
   return (
     <div>
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 animate-fade-in">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold mb-4">How It Works</h2>
           <p className="text-gray-600 max-w-xl mx-auto">
