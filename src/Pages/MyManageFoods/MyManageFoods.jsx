@@ -20,7 +20,7 @@ const MyManageFoods = () => {
 
   console.log(myFoods);
   return (
-    <div>
+    <div className="flex flex-col gap-5">
       {myFoods.map((food) => (
         <MyFoodCard food={food}></MyFoodCard>
       ))}

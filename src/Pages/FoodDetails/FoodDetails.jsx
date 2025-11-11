@@ -61,7 +61,7 @@ const FoodDetails = () => {
   };
 
   return (
-    <main className="max-w-4xl mx-auto p-6">
+    <main className="max-w-5xl mx-auto p-6">
       <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Left: large image */}
@@ -184,62 +184,144 @@ const FoodDetails = () => {
       </div>
 
       {user?.email === food?.donators_email && (
-        <div className="mt-20">
-          <h2 className="text-2xl font-bold text-center">Request Foods</h2>
-          <div className="overflow-x-auto">
-            <table className="table bg-white">
-              {/* head */}
-              <thead>
+        // <div className="mt-20">
+        //   <h2 className="text-2xl font-bold text-center">Request Foods</h2>
+        //   <div className="overflow-x-auto">
+        //     <table className="table bg-white">
+        //       {/* head */}
+        //       <thead>
+        //         <tr>
+        //           {/* <th>
+        //           <label>
+        //             <input type="checkbox" className="checkbox" />
+        //           </label>
+        //         </th> */}
+        //           <th>Name</th>
+        //           <th>Location</th>
+        //           <th>Reason</th>
+        //           <th>Contact No</th>
+        //           <th>Actions</th>
+        //         </tr>
+        //       </thead>
+        //       <tbody>
+        //         {/* row 1 */}
+
+        //         {requestData.map((data) => (
+        //           <tr>
+        //             {/* <th>
+        //           <label>
+        //             <input type="checkbox" className="checkbox" />
+        //           </label>
+        //         </th> */}
+        //             <td>
+        //               <div className="flex items-center gap-3">
+        //                 <div className="avatar">
+        //                   <div className="mask mask-squircle h-12 w-12">
+        //                     <img
+        //                       src={data.photoURL}
+        //                       alt="Avatar Tailwind CSS Component"
+        //                     />
+        //                   </div>
+        //                 </div>
+        //                 <div>
+        //                   <div className="font-bold">{data.name}</div>
+        //                   <div className="text-sm opacity-50">{data.email}</div>
+        //                 </div>
+        //               </div>
+        //             </td>
+        //             <td>
+        //               <span className="badge badge-ghost badge-sm">
+        //                 {data.location}
+        //               </span>
+        //             </td>
+        //             <td>{data.reason}</td>
+        //             <td>{data.contact}</td>
+        //             <div className="flex items-center gap-2 mt-6">
+        //               <button className="badge badge-primary ">Accept</button>
+        //               <button className="badge badge-secondary">Reject</button>
+        //             </div>
+        //           </tr>
+        //         ))}
+        //       </tbody>
+        //     </table>
+        //   </div>
+        // </div>
+        <div className="mt-20 px-4">
+          <h2 className="text-3xl font-extrabold text-center text-gray-800 mb-8">
+            🍱 Request Foods
+          </h2>
+
+          <div className="overflow-x-auto rounded-2xl shadow-lg border border-gray-200 bg-white">
+            <table className="table w-full text-sm text-gray-700">
+              {/* Table Head */}
+              <thead className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-base">
                 <tr>
-                  {/* <th>
-                  <label>
-                    <input type="checkbox" className="checkbox" />
-                  </label>
-                </th> */}
-                  <th>Name</th>
-                  <th>Location</th>
-                  <th>Reason</th>
-                  <th>Contact No</th>
-                  <th>Actions</th>
+                  <th className="py-3 px-4 text-left">Name</th>
+                  <th className="py-3 px-4 text-left">Location</th>
+                  <th className="py-3 px-4 text-left">Reason</th>
+                  <th className="py-3 px-4 text-left">Contact No</th>
+                  <th className="py-3 px-4 text-center">Actions</th>
                 </tr>
               </thead>
-              <tbody>
-                {/* row 1 */}
 
+              {/* Table Body */}
+              <tbody>
                 {requestData.map((data) => (
-                  <tr>
-                    {/* <th>
-                  <label>
-                    <input type="checkbox" className="checkbox" />
-                  </label>
-                </th> */}
-                    <td>
+                  <tr
+                    key={data._id}
+                    className="hover:bg-gray-50 transition duration-200 border-b border-gray-100"
+                  >
+                    {/* Name + Email */}
+                    <td className="py-4 px-4">
                       <div className="flex items-center gap-3">
                         <div className="avatar">
                           <div className="mask mask-squircle h-12 w-12">
                             <img
                               src={data.photoURL}
-                              alt="Avatar Tailwind CSS Component"
+                              alt="user avatar"
+                              className="object-cover"
                             />
                           </div>
                         </div>
                         <div>
-                          <div className="font-bold">{data.name}</div>
-                          <div className="text-sm opacity-50">{data.email}</div>
+                          <div className="font-semibold text-gray-900">
+                            {data.name}
+                          </div>
+                          <div className="text-xs text-gray-500">
+                            {data.email}
+                          </div>
                         </div>
                       </div>
                     </td>
-                    <td>
-                      <span className="badge badge-ghost badge-sm">
+
+                    {/* Location */}
+                    <td className="py-4 px-4">
+                      <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">
                         {data.location}
                       </span>
                     </td>
-                    <td>{data.reason}</td>
-                    <td>{data.contact}</td>
-                    <div className="flex items-center gap-2 mt-6">
-                      <button className="badge badge-primary ">Accept</button>
-                      <button className="badge badge-secondary">Reject</button>
-                    </div>
+
+                    {/* Reason */}
+                    <td className="py-4 px-4 max-w-xs truncate">
+                      {data.reason}
+                    </td>
+
+                    {/* Contact */}
+                    <td className="py-4 px-4 text-gray-800 font-medium">
+                      {data.contact}
+                    </td>
+
+                    {/* Actions */}
+                    <td className="py-4 px-4 text-center">
+                      <div className="flex justify-center gap-2">
+                        <button className="px-3 py-1.5 bg-green-500 text-white rounded-lg text-xs font-semibold hover:bg-green-600 transition">
+                          Accept
+                        </button>
+                        <button className="px-3 py-1.5 bg-red-500 text-white rounded-lg text-xs font-semibold hover:bg-red-600 transition">
+                          Reject
+                        </button>
+                      </div>
+                    </td>
                   </tr>
                 ))}
               </tbody>

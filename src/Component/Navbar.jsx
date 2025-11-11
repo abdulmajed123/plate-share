@@ -9,8 +9,12 @@ const Navbar = () => {
   const { signOutUser, user } = use(AuthContext);
   const links = (
     <>
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/available-foods">Available Foods</NavLink>
+      <NavLink to="/" className="text-md font-semibold">
+        Home
+      </NavLink>
+      <NavLink to="/available-foods" className="text-md font-semibold">
+        Available Foods
+      </NavLink>
     </>
   );
   const handleSignOut = () => {
@@ -50,7 +54,7 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <a className=" btn-ghost text-2xl font-bold">Food Share</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 flex items-center gap-3">
@@ -59,24 +63,6 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         {user ? (
-          // <div className="dropdown dropdown-end">
-          //   <div tabIndex={0} role="button" className="btn m-1">
-          //     Click ⬇️
-          //   </div>
-          //   <ul
-          //     tabIndex="-1"
-          //     className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
-          //   >
-          //     <li>
-          //       <a>Item 1</a>
-          //     </li>
-          //     <li>
-          //       <button onClick={handleSignOut} className="btn">
-          //         LogOut
-          //       </button>
-          //     </li>
-          //   </ul>
-          // </div>
           <div className="dropdown dropdown-end z-50">
             {" "}
             <div
@@ -103,11 +89,6 @@ const Navbar = () => {
                 <li className="text-sm font-bold">{user.displayName}</li>
                 <li className="text-xs">{user.email}</li>
               </div>
-              <li className="mt-3">
-                <Link to={"/profile"}>
-                  <FaUser /> Profile
-                </Link>
-              </li>
 
               <li>
                 <Link to={"/add-food"}>Add Food</Link>
@@ -131,7 +112,7 @@ const Navbar = () => {
             </ul>
           </div>
         ) : (
-          <Link to="/login" className="btn">
+          <Link to="/login" className="btn hover:bg-black hover:text-white">
             Login
           </Link>
         )}

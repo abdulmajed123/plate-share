@@ -41,51 +41,56 @@ const MyFoodCard = ({ food }) => {
     });
   };
   return (
-    <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl border border-gray-200">
+    <div className="max-w-3xl p-2  md:max-w-4xl mx-auto bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200 animate-fade-in">
       <div className="md:flex">
-        <div className="md:shrink-0">
+        {/* Image Section */}
+        <div className="md:shrink-0 p-3">
           <img
-            className="h-48 w-full object-cover md:h-full md:w-48"
+            className="h-40 w-full object-cover rounded-xl md:h-full md:w-80"
             src={food_image}
-            alt="Grilled Chicken and Naan Roti"
+            alt={food_name}
           />
         </div>
-        <div className="p-4">
-          <h2 className="text-xl font-semibold text-gray-900">{food_name}</h2>
-          <p className="mt-2 text-gray-600 text-sm">
+
+        {/* Content Section */}
+        <div className="p-5">
+          <h2 className="text-xl font-bold text-gray-900 mb-2">{food_name}</h2>
+          <p className="text-gray-600 text-sm leading-relaxed line-clamp-3">
             Grilled Chicken and Naan is a very popular food in Bangladesh. This
             dish includes grilled chicken, naan roti, fresh salad, and sauce.
           </p>
+
           <ul className="mt-4 text-sm text-gray-700 space-y-1">
             <li>
-              <strong>📍 Pickup Location:</strong> Melandha
+              <strong>📍 Location:</strong> Melandha
             </li>
             <li>
               <strong>📦 Quantity:</strong> {food_qty}
             </li>
             <li>
-              <strong>📅 Expiry Date:</strong> November 15, 2025
+              <strong>📅 Expiry:</strong> Nov 15, 2025
             </li>
             <li>
-              <strong>📬 Donator Email:</strong> myfriend@gmail.com
+              <strong>📬 Email:</strong> myfriend@gmail.com
             </li>
             <li>
-              <strong>🕒 Created At:</strong> November 10, 2025
+              <strong>🕒 Added:</strong> Nov 10, 2025
             </li>
             <li>
               <strong>✅ Status:</strong> Available
             </li>
           </ul>
-          <div className="mt-4 flex space-x-2">
+
+          <div className="mt-5 flex space-x-2">
             <Link
               to={`/update-food/${_id}`}
-              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
+              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-1.5 px-4 rounded-lg text-sm transition"
             >
-              Update Food
+              Update
             </Link>
             <button
               onClick={handleDelete}
-              className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded"
+              className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1.5 px-4 rounded-lg text-sm transition"
             >
               Delete
             </button>
