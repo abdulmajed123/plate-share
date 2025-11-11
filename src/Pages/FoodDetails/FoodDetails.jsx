@@ -1,12 +1,12 @@
 import React, { use, useEffect, useRef, useState } from "react";
 import { useLoaderData, useNavigate, useParams } from "react-router";
 import { AuthContext } from "../../Provider/AuthContext";
+import FoodRequestTable from "../foodRequestTable/FoodRequestTable";
 
 const FoodDetails = () => {
   const { user } = use(AuthContext);
   const { id } = useParams();
   const [food, setFood] = useState([]);
-  // const [requestFood, setRequestFood] = useState([]);
   const requestData = useLoaderData();
   console.log(requestData);
 
@@ -60,19 +60,6 @@ const FoodDetails = () => {
       });
   };
 
-  // useEffect(() => {
-  //   fetch(`http://localhost:3000/food-request/${id}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       setRequestFood(data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, [id]);
-
-  // console.log(requestFood);
   return (
     <main className="max-w-4xl mx-auto p-6">
       <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden">
@@ -195,66 +182,71 @@ const FoodDetails = () => {
           </div>
         </div>
       </div>
-      <div className="mt-20">
-        <h2 className="text-2xl font-bold text-center">Request Foods</h2>
-        <div className="overflow-x-auto">
-          <table className="table">
-            {/* head */}
-            <thead>
-              <tr>
-                {/* <th>
-                  <label>
-                    <input type="checkbox" className="checkbox" />
-                  </label>
-                </th> */}
-                <th>Name</th>
-                <th>Location</th>
-                <th>Reason</th>
-                <th>Contact No</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* row 1 */}
 
-              {requestData.map((data) => (
+      {user?.email === food?.donators_email && (
+        <div className="mt-20">
+          <h2 className="text-2xl font-bold text-center">Request Foods</h2>
+          <div className="overflow-x-auto">
+            <table className="table bg-white">
+              {/* head */}
+              <thead>
                 <tr>
                   {/* <th>
                   <label>
                     <input type="checkbox" className="checkbox" />
                   </label>
                 </th> */}
-                  <td>
-                    <div className="flex items-center gap-3">
-                      <div className="avatar">
-                        <div className="mask mask-squircle h-12 w-12">
-                          <img
-                            src={data.photoURL}
-                            alt="Avatar Tailwind CSS Component"
-                          />
+                  <th>Name</th>
+                  <th>Location</th>
+                  <th>Reason</th>
+                  <th>Contact No</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* row 1 */}
+
+                {requestData.map((data) => (
+                  <tr>
+                    {/* <th>
+                  <label>
+                    <input type="checkbox" className="checkbox" />
+                  </label>
+                </th> */}
+                    <td>
+                      <div className="flex items-center gap-3">
+                        <div className="avatar">
+                          <div className="mask mask-squircle h-12 w-12">
+                            <img
+                              src={data.photoURL}
+                              alt="Avatar Tailwind CSS Component"
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <div className="font-bold">{data.name}</div>
+                          <div className="text-sm opacity-50">{data.email}</div>
                         </div>
                       </div>
-                      <div>
-                        <div className="font-bold">{data.name}</div>
-                        {/* <div className="text-sm opacity-50">{user.email}</div> */}
-                      </div>
+                    </td>
+                    <td>
+                      <span className="badge badge-ghost badge-sm">
+                        {data.location}
+                      </span>
+                    </td>
+                    <td>{data.reason}</td>
+                    <td>{data.contact}</td>
+                    <div className="flex items-center gap-2 mt-6">
+                      <button className="badge badge-primary ">Accept</button>
+                      <button className="badge badge-secondary">Reject</button>
                     </div>
-                  </td>
-                  <td>
-                    <span className="badge badge-ghost badge-sm">
-                      {/* {data.location} */}
-                    </span>
-                  </td>
-                  {/* <td>{data.reason}</td> */}
-                  <th>
-                    {/* <button className="btn btn-ghost btn-xs">{data}</button> */}
-                  </th>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      )}
     </main>
   );
 };

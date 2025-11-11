@@ -10,6 +10,7 @@ import MyManageFoods from "../Pages/MyManageFoods/MyManageFoods";
 import MyFoodsRequest from "../Pages/MyFoodsRequest/MyFoodsRequest";
 import FoodDetails from "../Pages/FoodDetails/FoodDetails";
 import UpdateFood from "../Pages/UpdateFood/UpdateFood";
+import FoodRequestTable from "../Pages/foodRequestTable/FoodRequestTable";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
         element: <FoodDetails></FoodDetails>,
         loader: ({ params }) =>
           fetch(`http://localhost:3000/food-request/${params.id}`),
+      },
+      {
+        path: "/food-request-table",
+        element: <FoodRequestTable></FoodRequestTable>,
       },
       {
         path: "/add-food",
