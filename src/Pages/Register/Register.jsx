@@ -15,6 +15,16 @@ const Register = () => {
     const email = e.target.email.value;
     const photoURL = e.target.photoURL.value;
     const password = e.target.password.value;
+
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
+    if (!passwordRegex.test(password)) {
+      toast.error(
+        "Password must have at least 1 uppercase, 1 lowercase and be at least 6 characters long."
+      );
+
+      return;
+    }
     console.log({ name, email, photoURL, password });
 
     createUser(email, password)

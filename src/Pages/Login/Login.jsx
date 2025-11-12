@@ -19,11 +19,12 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        Navigate("/");
         toast.success(" User Login Successfully");
+        Navigate("/");
       })
       .catch((error) => {
         console.log(error);
+        toast.error("Invalid email or password. Please try again.");
       });
   };
 
@@ -31,8 +32,8 @@ const Login = () => {
     signInWithGoogle()
       .then((result) => {
         console.log(result.user);
-        Navigate("/");
         toast.success(" User Login Successfully");
+        Navigate("/");
       })
       .catch((error) => {
         console.log(error);

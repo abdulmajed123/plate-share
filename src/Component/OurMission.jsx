@@ -25,14 +25,14 @@ const OurMission = () => {
           </div>
 
           {/* Stat 2 */}
-          <div className="bg-yellow-50 rounded-2xl shadow-lg p-8 flex flex-col items-center">
+          <div className="bg-yellow-50 rounded-2xl shadow-lg p-8 flex flex-col items-center transition-transform transform hover:scale-105 duration-300">
             <FaUtensils className="text-yellow-500 text-5xl mb-4" />
             <h3 className="text-3xl font-bold">3,500+</h3>
             <p className="text-gray-600 mt-2">Meals Shared</p>
           </div>
 
           {/* Stat 3 */}
-          <div className="bg-yellow-50 rounded-2xl shadow-lg p-8 flex flex-col items-center">
+          <div className="bg-yellow-50 rounded-2xl shadow-lg p-8 flex flex-col items-center transition-transform transform hover:scale-105 duration-300">
             <FaHandsHelping className="text-yellow-500 text-5xl mb-4" />
             <h3 className="text-3xl font-bold">150+</h3>
             <p className="text-gray-600 mt-2">Active Donors</p>

@@ -12,7 +12,7 @@ const FoodRequestCard = ({ request }) => {
   });
   return (
     <div>
-      <div className="max-w-xl mx-auto bg-white rounded-2xl shadow-xl border-3 border-gray-100 overflow-hidden mt-5">
+      <div className="max-w-xl mx-auto bg-white rounded-2xl shadow-xl border-3 border-gray-100 overflow-hidden mt-5 animate-fade-in">
         {/* Header */}
         <div className="flex items-center gap-4 p-5 border-b bg-gray-50">
           <img
