@@ -184,88 +184,6 @@ const FoodDetails = () => {
       </div>
 
       {user?.email === food?.donators_email && (
-        // <div className="mt-20 px-4">
-        //   <h2 className="text-3xl font-extrabold text-center text-gray-800 mb-8">
-        //     🍱 Request Foods
-        //   </h2>
-
-        //   <div className="overflow-x-auto rounded-2xl shadow-lg border border-gray-200 bg-white">
-        //     <table className="table w-full text-sm text-gray-700">
-        //       {/* Table Head */}
-        //       <thead className="bg-linear-to-r from-blue-500 to-indigo-600 text-white text-base">
-        //         <tr>
-        //           <th className="py-3 px-4 text-left">Name</th>
-        //           <th className="py-3 px-4 text-left">Location</th>
-        //           <th className="py-3 px-4 text-left">Reason</th>
-        //           <th className="py-3 px-4 text-left">Contact No</th>
-        //           <th className="py-3 px-4 text-center">Actions</th>
-        //         </tr>
-        //       </thead>
-
-        //       {/* Table Body */}
-        //       <tbody>
-        //         {requestData.map((data) => (
-        //           <tr
-        //             key={data._id}
-        //             className="hover:bg-gray-50 transition duration-200 border-b border-gray-100"
-        //           >
-        //             {/* Name + Email */}
-        //             <td className="py-4 px-4">
-        //               <div className="flex items-center gap-3">
-        //                 <div className="avatar">
-        //                   <div className="mask mask-squircle h-12 w-12">
-        //                     <img
-        //                       src={data.photoURL}
-        //                       alt="user avatar"
-        //                       className="object-cover"
-        //                     />
-        //                   </div>
-        //                 </div>
-        //                 <div>
-        //                   <div className="font-semibold text-gray-900">
-        //                     {data.name}
-        //                   </div>
-        //                   <div className="text-xs text-gray-500">
-        //                     {data.email}
-        //                   </div>
-        //                 </div>
-        //               </div>
-        //             </td>
-
-        //             {/* Location */}
-        //             <td className="py-4 px-4">
-        //               <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">
-        //                 {data.location}
-        //               </span>
-        //             </td>
-
-        //             {/* Reason */}
-        //             <td className="py-4 px-4 max-w-xs truncate">
-        //               {data.reason}
-        //             </td>
-
-        //             {/* Contact */}
-        //             <td className="py-4 px-4 text-gray-800 font-medium">
-        //               {data.contact}
-        //             </td>
-
-        //             {/* Actions */}
-        //             <td className="py-4 px-4 text-center">
-        //               <div className="flex justify-center gap-2">
-        //                 <button className="px-3 py-1.5 bg-green-500 text-white rounded-lg text-xs font-semibold hover:bg-green-600 transition">
-        //                   Accept
-        //                 </button>
-        //                 <button className="px-3 py-1.5 bg-red-500 text-white rounded-lg text-xs font-semibold hover:bg-red-600 transition">
-        //                   Reject
-        //                 </button>
-        //               </div>
-        //             </td>
-        //           </tr>
-        //         ))}
-        //       </tbody>
-        //     </table>
-        //   </div>
-        // </div>
         <div className="mt-20 px-4">
           <h2 className="text-3xl font-extrabold text-center text-gray-800 mb-8">
             🍱 Request Foods
@@ -274,7 +192,7 @@ const FoodDetails = () => {
           <div className="overflow-x-auto rounded-2xl shadow-lg border border-gray-200 bg-white">
             <table className="min-w-full text-sm text-gray-700">
               {/* Table Head */}
-              <thead className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-base">
+              <thead className="bg-linear-to-r from-blue-500 to-indigo-600 text-white text-base">
                 <tr>
                   <th className="py-3 px-4 text-left">Name</th>
                   <th className="py-3 px-4 text-left">Location</th>
