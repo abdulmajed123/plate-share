@@ -22,7 +22,8 @@
   font-weight: bold;
   border: 1px solid #cac8c8ff;
   border-radius: 20px;
-  background: rgb(120, 118, 118);
+  /* background: rgb(120, 118, 118); */
+  background: rgb(227, 100, 142);
   padding-right: 5px;
   padding-left: 5px;
 }

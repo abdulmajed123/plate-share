@@ -9,17 +9,17 @@ const Banner = () => {
         className="relative bg-cover bg-center h-[70vh]"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1470&q=80')",
+            "url('https://images.unsplash.com/photo-1605470669161-06d8e96d6c3e?auto=format&fit=crop&w=1600&q=80')",
         }}
       >
         {/* Overlay */}
-        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div className="absolute inset-0 bg-white bg-opacity-60"></div>
 
         {/* Content */}
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
           {/* Animated Heading */}
           <motion.h1
-            className="text-4xl md:text-6xl font-bold text-white mb-4"
+            className="text-4xl md:text-6xl font-bold text-gray-900 mb-4"
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
@@ -29,7 +29,7 @@ const Banner = () => {
 
           {/* Animated Paragraph */}
           <motion.p
-            className="text-lg md:text-2xl text-gray-200 mb-8 max-w-xl"
+            className="text-lg md:text-2xl text-gray-700 mb-8 max-w-xl"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 1, ease: "easeOut" }}
@@ -47,7 +47,7 @@ const Banner = () => {
           >
             <Link
               to="/available-foods"
-              className="bg-transparent border border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-black transition"
+              className="bg-linear-to-r from-pink-500 to-red-600 hover:from-red-600 hover:to-pink-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition"
             >
               View All Foods
             </Link>

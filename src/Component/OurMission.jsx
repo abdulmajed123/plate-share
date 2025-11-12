@@ -1,4 +1,5 @@
 import React from "react";
+import CountUp from "react-countup";
 import { FaHandsHelping, FaUsers, FaUtensils } from "react-icons/fa";
 
 const OurMission = () => {
@@ -18,23 +19,31 @@ const OurMission = () => {
         {/* Community Stats */}
         <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 px-4 text-center">
           {/* Stat 1 */}
-          <div className="bg-yellow-50 rounded-2xl shadow-lg p-8 flex flex-col items-center transition-transform transform hover:scale-105 duration-300">
+          <div className="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center border border-gray-100 transition-transform transform hover:scale-105 hover:shadow-2xl duration-300">
             <FaUsers className="text-yellow-500 text-5xl mb-4" />
-            <h3 className="text-3xl font-bold">1,250+</h3>
+            <h3 className="text-3xl font-bold">
+              <h3 className="text-3xl font-bold">
+                <CountUp end={1250} duration={5} />+
+              </h3>
+            </h3>
             <p className="text-gray-600 mt-2">Community Members</p>
           </div>
 
           {/* Stat 2 */}
-          <div className="bg-yellow-50 rounded-2xl shadow-lg p-8 flex flex-col items-center transition-transform transform hover:scale-105 duration-300">
+          <div className="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center border border-gray-100 transition-transform transform hover:scale-105 hover:shadow-2xl duration-300">
             <FaUtensils className="text-yellow-500 text-5xl mb-4" />
-            <h3 className="text-3xl font-bold">3,500+</h3>
+            <h3 className="text-3xl font-bold">
+              <CountUp end={3500} duration={5} />+
+            </h3>
             <p className="text-gray-600 mt-2">Meals Shared</p>
           </div>
 
           {/* Stat 3 */}
-          <div className="bg-yellow-50 rounded-2xl shadow-lg p-8 flex flex-col items-center transition-transform transform hover:scale-105 duration-300">
+          <div className="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center border border-gray-100 transition-transform transform hover:scale-105 hover:shadow-2xl duration-300">
             <FaHandsHelping className="text-yellow-500 text-5xl mb-4" />
-            <h3 className="text-3xl font-bold">150+</h3>
+            <h3 className="text-3xl font-bold">
+              <CountUp end={150} duration={5} />+
+            </h3>
             <p className="text-gray-600 mt-2">Active Donors</p>
           </div>
         </div>

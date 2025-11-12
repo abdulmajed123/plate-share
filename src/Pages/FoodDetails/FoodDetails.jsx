@@ -7,6 +7,8 @@ const FoodDetails = () => {
   const { user } = use(AuthContext);
   const { id } = useParams();
   const [food, setFood] = useState([]);
+  const [requests, setRequests] = useState([]);
+  // const [rejects, setRejects] = useState([]);
   const requestData = useLoaderData();
   console.log(requestData);
 
@@ -60,6 +62,60 @@ const FoodDetails = () => {
       });
   };
 
+  useEffect(() => {
+    fetch();
+  }, []);
+
+  const handleAccept = (requestId) => {
+    fetch(`http://localhost:3000/food-request/accept/${requestId}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.message);
+        // UI update - request table
+        setRequests((prev) =>
+          prev.map((req) =>
+            req._id === requestId ? { ...req, status: "accepted" } : req
+          )
+        );
+      });
+  };
+
+  // const handleReject = (requestId) => {
+  //   fetch(`http://localhost:3000/food-request/reject/${requestId}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       setRejects((prev) =>
+  //         prev.map((req) =>
+  //           req._id === requestId ? { ...req, status: "rejected" } : req
+  //         )
+  //       );
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
+
+  const handleReject = (requestId) => {
+    fetch(`http://localhost:3000/food-request/reject/${requestId}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.message);
+        setRequests((prev) =>
+          prev.map((req) =>
+            req._id === requestId ? { ...req, status: "rejected" } : req
+          )
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <main className="max-w-5xl mx-auto p-6">
       <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden">
@@ -75,9 +131,7 @@ const FoodDetails = () => {
               <div className="absolute left-4 top-4 bg-black/60 text-white text-xs px-3 py-1 rounded-md">
                 {/* {food.food_status} */}
               </div>
-              <div className="absolute left-4 bottom-4 bg-white/90 dark:bg-black/70 px-3 py-1 rounded-md text-sm">
-                {/* Expires: {formatDate(food.expire_date)} */}
-              </div>
+              <div className="absolute left-4 bottom-4 bg-white/90 dark:bg-black/70 px-3 py-1 rounded-md text-sm"></div>
             </div>
           </div>
 
@@ -85,16 +139,13 @@ const FoodDetails = () => {
           <div className="md:col-span-2 p-6 flex flex-col gap-4">
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1">
-                <h1 className="text-2xl font-semibold leading-tight">
+                <h1 className="text-2xl font-bold leading-tight">
                   {food.food_name}
                 </h1>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                  {/* {food.pickup_location} • Posted: {formatDate(food.created_at)} */}
-                </p>
               </div>
 
               <div className="text-right">
-                <div className="text-xs text-gray-500">Quantity</div>
+                <div className="text-xs font-bold text-gray-500">Quantity</div>
                 <div className="text-lg font-medium">{food.food_qty}</div>
               </div>
             </div>
@@ -126,7 +177,7 @@ const FoodDetails = () => {
               <div className="flex flex-col items-end gap-2">
                 <button
                   onClick={foodRequestModal}
-                  className="px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white font-medium"
+                  className="px-4 py-2 rounded-lg bg-linear-to-r from-pink-500 to-pink-700 hover:from-pink-700 hover:to-pink-500  text-white font-medium"
                 >
                   Request Food
                 </button>
@@ -192,7 +243,7 @@ const FoodDetails = () => {
           <div className="overflow-x-auto rounded-2xl shadow-lg border border-gray-200 bg-white">
             <table className="min-w-full text-sm text-gray-700">
               {/* Table Head */}
-              <thead className="bg-linear-to-r from-blue-500 to-indigo-600 text-white text-base">
+              <thead className="bg-linear-to-r from-pink-500 to-red-500 text-white text-base">
                 <tr>
                   <th className="py-3 px-4 text-left">Name</th>
                   <th className="py-3 px-4 text-left">Location</th>
@@ -255,10 +306,16 @@ const FoodDetails = () => {
                     {/* Actions */}
                     <td className="py-4 px-4 text-center">
                       <div className="flex justify-center gap-2 flex-wrap">
-                        <button className="px-3 py-1.5 bg-green-500 text-white rounded-lg text-xs font-semibold hover:bg-green-600 transition">
+                        <button
+                          onClick={() => handleAccept(data._id)}
+                          className="px-3 py-1.5 bg-green-500 text-white rounded-lg text-xs font-semibold hover:bg-green-600 transition"
+                        >
                           Accept
                         </button>
-                        <button className="px-3 py-1.5 bg-red-500 text-white rounded-lg text-xs font-semibold hover:bg-red-600 transition">
+                        <button
+                          onClick={() => handleReject(data._id)}
+                          className="px-3 py-1.5 bg-red-500 text-white rounded-lg text-xs font-semibold hover:bg-red-600 transition"
+                        >
                           Reject
                         </button>
                       </div>

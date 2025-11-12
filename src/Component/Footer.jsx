@@ -1,4 +1,5 @@
 import React from "react";
+import foodLogo from "../assets/foodLogo.png";
 import {
   FaFacebookF,
   FaInstagram,
@@ -63,12 +64,10 @@ const Footer = () => {
       <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
         {/* Logo & Name */}
         <div className="flex items-center mb-6 md:mb-0">
-          <img
-            src="https://via.placeholder.com/40"
-            alt="Website Logo"
-            className="w-10 h-10 mr-3"
-          />
-          <span className="text-xl font-bold">FoodShare</span>
+          <img src={foodLogo} alt="Website Logo" className="w-20 h-20" />
+          <span className="text-2xl font-bold bg-linear-to-r from-yellow-400 via-red-500 to-pink-500 bg-clip-text text-transparent">
+            FoodShare
+          </span>
         </div>
 
         {/* Copyright */}

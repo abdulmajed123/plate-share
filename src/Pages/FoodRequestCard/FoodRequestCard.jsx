@@ -76,6 +76,57 @@ const FoodRequestCard = ({ request }) => {
           </button>
         </div> */}
       </div>
+      <div className="max-w-xl mx-auto bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden mt-5 animate-fade-in">
+        {/* Header */}
+        <div className="flex items-center gap-4 p-5 border-b border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+          <img
+            src={request.photoURL}
+            alt="User Avatar"
+            className="w-16 h-16 rounded-full object-cover border border-gray-300 dark:border-gray-600"
+          />
+          <div>
+            <h3 className="text-lg font-semibold">{request.name}</h3>
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              {request.email}
+            </p>
+          </div>
+          <span className="ml-auto px-3 py-1 text-sm rounded-full bg-yellow-100 dark:bg-yellow-500/30 text-yellow-800 dark:text-yellow-200 font-medium">
+            {request.status}
+          </span>
+        </div>
+
+        {/* Body */}
+        <div className="p-5 space-y-3">
+          <div className="flex justify-between text-sm">
+            <p>
+              <span className="font-bold">Location: </span>
+              <span className="font-medium">{request.location}</span>
+            </p>
+            <p>
+              <span className="font-bold">Contact: </span>
+              <span className="font-medium">{request.contact}</span>
+            </p>
+          </div>
+
+          <div>
+            <p>
+              <span className="font-bold">Reason: </span>
+              <span className="font-medium">{request.reason}</span>
+            </p>
+          </div>
+
+          <div className="flex justify-between mt-3">
+            <p>
+              <span className="font-bold">Food ID: </span>
+              <span className="font-medium">{request.foodId}</span>
+            </p>
+            <p>
+              <span className="font-bold">Date: </span>
+              <span className="font-medium">{date}</span>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
