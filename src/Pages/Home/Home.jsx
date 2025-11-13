@@ -9,7 +9,7 @@ const Home = () => {
   const [foods, setFoods] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    fetch("http://localhost:3000/highest-foods")
+    fetch("https://plate-share-api-server-delta.vercel.app/highest-foods")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

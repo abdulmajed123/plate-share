@@ -9,7 +9,9 @@ const MyManageFoods = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/my-foods?email=${user.email}`)
+    fetch(
+      `https://plate-share-api-server-delta.vercel.app/my-foods?email=${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

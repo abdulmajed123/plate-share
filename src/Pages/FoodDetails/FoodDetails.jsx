@@ -2,20 +2,20 @@ import React, { use, useEffect, useRef, useState } from "react";
 import { useLoaderData, useNavigate, useParams } from "react-router";
 import { AuthContext } from "../../Provider/AuthContext";
 import FoodRequestTable from "../foodRequestTable/FoodRequestTable";
+import { toast } from "react-toastify";
 
 const FoodDetails = () => {
   const { user } = use(AuthContext);
   const { id } = useParams();
   const [food, setFood] = useState([]);
   const [requests, setRequests] = useState([]);
-  // const [rejects, setRejects] = useState([]);
   const requestData = useLoaderData();
   console.log(requestData);
 
   const foodRequestModalRef = useRef(null);
   const navigate = useNavigate();
   useEffect(() => {
-    fetch(`http://localhost:3000/foods/${id}`)
+    fetch(`https://plate-share-api-server-delta.vercel.app/foods/${id}`)
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);
@@ -45,7 +45,7 @@ const FoodDetails = () => {
     };
     console.log(formData);
 
-    fetch("http://localhost:3000/food-request", {
+    fetch("https://plate-share-api-server-delta.vercel.app/food-request", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -67,12 +67,16 @@ const FoodDetails = () => {
   }, []);
 
   const handleAccept = (requestId) => {
-    fetch(`http://localhost:3000/food-request/accept/${requestId}`, {
-      method: "PATCH",
-    })
+    fetch(
+      `https://plate-share-api-server-delta.vercel.app/food-request/accept/${requestId}`,
+      {
+        method: "PATCH",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data.message);
+        toast.success("Food Request Accepted");
         // UI update - request table
         setRequests((prev) =>
           prev.map((req) =>
@@ -82,29 +86,17 @@ const FoodDetails = () => {
       });
   };
 
-  // const handleReject = (requestId) => {
-  //   fetch(`http://localhost:3000/food-request/reject/${requestId}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       setRejects((prev) =>
-  //         prev.map((req) =>
-  //           req._id === requestId ? { ...req, status: "rejected" } : req
-  //         )
-  //       );
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
-
   const handleReject = (requestId) => {
-    fetch(`http://localhost:3000/food-request/reject/${requestId}`, {
-      method: "PATCH",
-    })
+    fetch(
+      `https://plate-share-api-server-delta.vercel.app/food-request/reject/${requestId}`,
+      {
+        method: "PATCH",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data.message);
+        toast.success("Food Request Rejected");
         setRequests((prev) =>
           prev.map((req) =>
             req._id === requestId ? { ...req, status: "rejected" } : req
@@ -117,8 +109,9 @@ const FoodDetails = () => {
   };
 
   return (
-    <main className="max-w-5xl mx-auto p-6">
-      <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden">
+    <main className="min-h-screen flex flex-col justify-center items-center max-w-6xl mx-auto p-6 space-y-12">
+      {/* Food Details Section */}
+      <div className="w-full bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Left: large image */}
           <div className="md:col-span-1">
@@ -129,35 +122,38 @@ const FoodDetails = () => {
                 className="w-full h-full object-cover"
               />
               <div className="absolute left-4 top-4 bg-black/60 text-white text-xs px-3 py-1 rounded-md">
-                {/* {food.food_status} */}
+                {food.food_status}
               </div>
-              <div className="absolute left-4 bottom-4 bg-white/90 dark:bg-black/70 px-3 py-1 rounded-md text-sm"></div>
             </div>
           </div>
 
           {/* Right: details */}
-          <div className="md:col-span-2 p-6 flex flex-col gap-4">
-            <div className="flex items-start justify-between gap-4">
-              <div className="flex-1">
-                <h1 className="text-2xl font-bold leading-tight">
+          <div className="md:col-span-2 p-6 flex flex-col gap-5">
+            <div className="flex items-start justify-between gap-4 flex-wrap">
+              <div>
+                <h1 className="text-2xl font-bold leading-tight text-gray-900 dark:text-white">
                   {food.food_name}
                 </h1>
               </div>
 
               <div className="text-right">
-                <div className="text-xs font-bold text-gray-500">Quantity</div>
+                <div className="badge badge-primary badge-outline text-xs font-bold text-gray-500">
+                  Quantity
+                </div>
                 <div className="text-lg font-medium">{food.food_qty}</div>
               </div>
             </div>
 
             <section className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
-              <h3 className="text-sm font-semibold">Additional Notes</h3>
+              <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-100">
+                Additional Notes
+              </h3>
               <p className="text-sm text-gray-700 dark:text-gray-300 mt-2 leading-relaxed">
                 {food.additional_notes}
               </p>
             </section>
 
-            <section className="flex items-center justify-between gap-4">
+            <section className="flex items-center justify-between gap-4 flex-wrap">
               <div className="flex items-center gap-3">
                 <img
                   src={food.donators_image}
@@ -165,7 +161,7 @@ const FoodDetails = () => {
                   className="w-14 h-14 rounded-full object-cover shadow-sm"
                 />
                 <div>
-                  <div className="text-sm font-medium">
+                  <div className="text-sm font-medium text-gray-900 dark:text-white">
                     {food.donators_name}
                   </div>
                   <div className="text-xs text-gray-500 dark:text-gray-400">
@@ -174,56 +170,81 @@ const FoodDetails = () => {
                 </div>
               </div>
 
-              <div className="flex flex-col items-end gap-2">
+              <div>
                 <button
                   onClick={foodRequestModal}
-                  className="px-4 py-2 rounded-lg bg-linear-to-r from-pink-500 to-pink-700 hover:from-pink-700 hover:to-pink-500  text-white font-medium"
+                  className="px-4 py-2 rounded-lg bg-linear-to-r from-pink-500 to-pink-700 hover:from-pink-700 hover:to-pink-500 text-white font-medium transition"
                 >
                   Request Food
                 </button>
+
+                {/* Modal */}
 
                 <dialog
                   ref={foodRequestModalRef}
                   className="modal modal-bottom sm:modal-middle"
                 >
-                  <div className="modal-box">
-                    <h3 className="font-bold text-lg text-center">
+                  <div className="modal-box bg-white dark:bg-gray-900 dark:text-gray-100">
+                    <h3 className="font-bold text-lg text-center mb-4 text-gray-800 dark:text-gray-100">
                       Food Request Form
                     </h3>
-                    <form onSubmit={handleFoodRequestSubmit}>
-                      <fieldset className="fieldset">
-                        <label className="label">Location</label>
-                        <input
-                          type="text"
-                          name="location"
-                          placeholder="Write Location"
-                          className="input input-bordered w-full mb-3"
-                          required
-                        />
-                        <label className="label">Reason</label>
-                        <textarea
-                          name="reason"
-                          placeholder="Why Need Food?"
-                          className="textarea textarea-bordered w-full mb-3"
-                          required
-                        ></textarea>
-                        <label className="label">Contact No</label>
-                        <input
-                          type="number"
-                          name="contact"
-                          placeholder="Contact No."
-                          className="input input-bordered w-full mb-4"
-                          required
-                        />
 
-                        <button className="btn btn-neutral mt-4">Submit</button>
+                    <form onSubmit={handleFoodRequestSubmit}>
+                      <fieldset className="fieldset space-y-3">
+                        {/* Location */}
+                        <div>
+                          <label className="label text-gray-700 dark:text-gray-300">
+                            Location
+                          </label>
+                          <input
+                            type="text"
+                            name="location"
+                            placeholder="Write Location"
+                            className="input input-bordered w-full bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
+                            required
+                          />
+                        </div>
+
+                        {/* Reason */}
+                        <div>
+                          <label className="label text-gray-700 dark:text-gray-300">
+                            Reason
+                          </label>
+                          <textarea
+                            name="reason"
+                            placeholder="Why Need Food?"
+                            className="textarea textarea-bordered w-full bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
+                            required
+                          ></textarea>
+                        </div>
+
+                        {/* Contact */}
+                        <div>
+                          <label className="label text-gray-700 dark:text-gray-300">
+                            Contact No
+                          </label>
+                          <input
+                            type="number"
+                            name="contact"
+                            placeholder="Contact No."
+                            className="input input-bordered w-full bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
+                            required
+                          />
+                        </div>
+
+                        {/* Submit Button */}
+                        <button className="btn w-full text-white text-lg font-semibold bg-linear-to-r from-pink-500 to-red-500 hover:from-red-500 hover:to-pink-500 mt-4 dark:border-0">
+                          Submit
+                        </button>
                       </fieldset>
                     </form>
 
+                    {/* Close Button */}
                     <div className="modal-action">
                       <form method="dialog">
-                        {/* if there is a button in form, it will close the modal */}
-                        <button className="btn">Close</button>
+                        <button className="btn dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700">
+                          Close
+                        </button>
                       </form>
                     </div>
                   </div>
@@ -234,15 +255,15 @@ const FoodDetails = () => {
         </div>
       </div>
 
+      {/* Food Requests Table (Only for Donator) */}
       {user?.email === food?.donators_email && (
-        <div className="mt-20 px-4">
-          <h2 className="text-3xl font-extrabold text-center text-gray-800 mb-8">
+        <div className="w-full">
+          <h2 className="text-3xl font-extrabold text-center text-gray-800 dark:text-gray-100 mb-8">
             🍱 Request Foods
           </h2>
 
-          <div className="overflow-x-auto rounded-2xl shadow-lg border border-gray-200 bg-white">
-            <table className="min-w-full text-sm text-gray-700">
-              {/* Table Head */}
+          <div className="overflow-x-auto rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
+            <table className="min-w-full text-sm text-gray-700 dark:text-gray-200">
               <thead className="bg-linear-to-r from-pink-500 to-red-500 text-white text-base">
                 <tr>
                   <th className="py-3 px-4 text-left">Name</th>
@@ -253,14 +274,12 @@ const FoodDetails = () => {
                 </tr>
               </thead>
 
-              {/* Table Body */}
               <tbody>
                 {requestData.map((data) => (
                   <tr
                     key={data._id}
-                    className="hover:bg-gray-50 transition duration-200 border-b border-gray-100"
+                    className="hover:bg-gray-50 dark:hover:bg-gray-800 transition duration-200 border-b border-gray-100 dark:border-gray-700"
                   >
-                    {/* Name + Email */}
                     <td className="py-4 px-4">
                       <div className="flex items-center gap-3">
                         <div className="avatar">
@@ -276,47 +295,43 @@ const FoodDetails = () => {
                           </div>
                         </div>
                         <div>
-                          <div className="font-semibold text-gray-900">
+                          <div className="font-semibold text-gray-900 dark:text-white">
                             {data.name || "Unknown"}
                           </div>
-                          <div className="text-xs text-gray-500">
+                          <div className="text-xs text-gray-500 dark:text-gray-400">
                             {data.email}
                           </div>
                         </div>
                       </div>
                     </td>
 
-                    {/* Location */}
                     <td className="py-4 px-4">
-                      <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">
+                      <span className="px-2 py-1 bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300 rounded-full text-xs font-medium">
                         {data.location}
                       </span>
                     </td>
 
-                    {/* Reason */}
                     <td className="py-4 px-4 max-w-xs truncate">
                       {data.reason}
                     </td>
 
-                    {/* Contact */}
-                    <td className="py-4 px-4 text-gray-800 font-medium">
+                    <td className="py-4 px-4 font-medium text-gray-800 dark:text-gray-100">
                       {data.contact}
                     </td>
 
-                    {/* Actions */}
                     <td className="py-4 px-4 text-center">
                       <div className="flex justify-center gap-2 flex-wrap">
                         <button
                           onClick={() => handleAccept(data._id)}
                           className="px-3 py-1.5 bg-green-500 text-white rounded-lg text-xs font-semibold hover:bg-green-600 transition"
                         >
-                          Accept
+                          {data.status === "accepted" ? "Accepted" : "Accept"}
                         </button>
                         <button
                           onClick={() => handleReject(data._id)}
                           className="px-3 py-1.5 bg-red-500 text-white rounded-lg text-xs font-semibold hover:bg-red-600 transition"
                         >
-                          Reject
+                          {data.status === "rejected" ? "rejected" : "reject"}
                         </button>
                       </div>
                     </td>

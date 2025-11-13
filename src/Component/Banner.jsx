@@ -6,20 +6,20 @@ const Banner = () => {
   return (
     <div>
       <section
-        className="relative bg-cover bg-center h-[70vh]"
+        className="relative bg-cover bg-center h-[70vh] transition-all duration-500"
         style={{
           backgroundImage:
             "url('https://images.unsplash.com/photo-1605470669161-06d8e96d6c3e?auto=format&fit=crop&w=1600&q=80')",
         }}
       >
         {/* Overlay */}
-        <div className="absolute inset-0 bg-white bg-opacity-60"></div>
+        <div className="absolute inset-0 bg-white/60 dark:bg-gray-900/80 transition-all duration-500"></div>
 
         {/* Content */}
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
           {/* Animated Heading */}
           <motion.h1
-            className="text-4xl md:text-6xl font-bold text-gray-900 mb-4"
+            className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-gray-100 mb-4 drop-shadow-lg"
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
@@ -29,7 +29,7 @@ const Banner = () => {
 
           {/* Animated Paragraph */}
           <motion.p
-            className="text-lg md:text-2xl text-gray-700 mb-8 max-w-xl"
+            className="text-lg md:text-2xl text-gray-700 dark:text-gray-300 mb-8 max-w-xl leading-relaxed"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 1, ease: "easeOut" }}
@@ -47,9 +47,17 @@ const Banner = () => {
           >
             <Link
               to="/available-foods"
-              className="bg-linear-to-r from-pink-500 to-red-600 hover:from-red-600 hover:to-pink-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition"
+              className="bg-linear-to-r from-pink-600 to-red-700 hover:from-red-700 hover:to-pink-600 text-white px-6 py-3 rounded-lg font-semibold shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-[1.03]"
             >
-              View All Foods
+              🍛 View All Foods
+            </Link>
+
+            {/* Optional Secondary Button */}
+            <Link
+              to="/add-food"
+              className="border-2 border-pink-600 dark:border-pink-400 text-pink-600 dark:text-pink-300 px-6 py-3 rounded-lg font-semibold hover:bg-pink-50 dark:hover:bg-gray-800 transition-all duration-300"
+            >
+              ➕ Share Your Food
             </Link>
           </motion.div>
         </div>

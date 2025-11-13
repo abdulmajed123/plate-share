@@ -25,7 +25,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/available-foods",
-        loader: () => fetch("http://localhost:3000/foods"),
+        loader: () =>
+          fetch("https://plate-share-api-server-delta.vercel.app/foods"),
         element: <AvailableFoods></AvailableFoods>,
       },
       {
@@ -36,7 +37,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/food-request/${params.id}`),
+          fetch(
+            `https://plate-share-api-server-delta.vercel.app/food-request/${params.id}`
+          ),
       },
       {
         path: "/food-request-table",
@@ -66,7 +69,9 @@ const router = createBrowserRouter([
         path: "/update-food/:id",
         element: <UpdateFood></UpdateFood>,
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/foods/${params.id}`),
+          fetch(
+            `https://plate-share-api-server-delta.vercel.app/foods/${params.id}`
+          ),
       },
       {
         path: "/login",
