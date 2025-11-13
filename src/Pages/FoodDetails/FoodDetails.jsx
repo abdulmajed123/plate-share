@@ -79,7 +79,7 @@ const FoodDetails = () => {
         toast.success("Food Request Accepted");
         // UI update - request table
         setRequests((prev) =>
-          prev.map((req) =>
+          prev.filter((req) =>
             req._id === requestId ? { ...req, status: "accepted" } : req
           )
         );
@@ -98,7 +98,7 @@ const FoodDetails = () => {
         console.log(data.message);
         toast.success("Food Request Rejected");
         setRequests((prev) =>
-          prev.map((req) =>
+          prev.filter((req) =>
             req._id === requestId ? { ...req, status: "rejected" } : req
           )
         );
