@@ -24,3 +24,17 @@
 --**Backend:** Node.js, Express.js, MongoDB
 --**Authentication:** Firebase Auth
 --**Hosting:** Firebase Hosting + Vercel (for API)
+
+💻 Local Setup / How to Run
+
+1. clone the repository:
+   git clone https://github.com/abdulmajed123/plate-share.git
+
+2.Navigate to the project directory:
+cd plate-share
+
+3.Install dependencies:
+npm install
+
+4.Start the development server:
+npm run dev
