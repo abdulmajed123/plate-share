@@ -21,6 +21,7 @@ const AddFoods = () => {
       donators_name: user.displayName,
       donators_email: user.email,
       donators_image: user.photoURL,
+      role: "user",
     };
     console.log({ formData });
 

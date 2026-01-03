@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from "react";
+import React, { use } from "react";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../Provider/AuthContext";
 import { FaUser } from "react-icons/fa";
@@ -17,6 +17,18 @@ const Navbar = () => {
       </NavLink>
       <NavLink to="/available-foods" className="text-md font-semibold">
         Available Foods
+      </NavLink>
+      <NavLink to="/add-food" className="text-md font-semibold">
+        Add Food
+      </NavLink>
+      <NavLink to="/impact" className="text-md font-semibold">
+        Impact
+      </NavLink>
+      <NavLink to="/about" className="text-md font-semibold">
+        About
+      </NavLink>
+      <NavLink to="/contact" className="text-md font-semibold">
+        Contact
       </NavLink>
     </>
   );
@@ -103,18 +115,17 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content bg-gray-800 text-gray-100 rounded-box z-50 mt-3 w-52 p-2 shadow-lg"
             >
               <div className="pb-3 border-b border-gray-700">
-                <li className="text-sm font-bold">{user.displayName}</li>
-                <li className="text-xs text-gray-400">{user.email}</li>
+                <li className="text-sm font-bold text-center">
+                  {user.displayName}
+                </li>
+                {/* <li className="text-xs text-gray-400">{user.email}</li> */}
               </div>
 
               <li>
-                <NavLink to="/add-food">Add Food</NavLink>
+                <NavLink to="/profile">Profile</NavLink>
               </li>
               <li>
-                <NavLink to="/manage-my-foods">My Manage Foods</NavLink>
-              </li>
-              <li>
-                <NavLink to="/my-foods-request">My Food Requests</NavLink>
+                <NavLink to="/dashboard">Dashboard</NavLink>
               </li>
 
               <div>

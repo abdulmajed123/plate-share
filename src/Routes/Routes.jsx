@@ -12,6 +12,12 @@ import FoodDetails from "../Pages/FoodDetails/FoodDetails";
 import UpdateFood from "../Pages/UpdateFood/UpdateFood";
 import FoodRequestTable from "../Pages/foodRequestTable/FoodRequestTable";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import Impact from "../Component/Impact";
+import DashboardLayout from "../LayOuts/DashboardLayOut";
+import ManageUser from "../Pages/Dashboard/ManageUser/ManageUser";
+import DashboardHome from "../Pages/Dashboard/DashboardHome/DashboardHome";
+import About from "../Pages/About/About";
+import Contact from "../Pages/Contact/Contact";
 
 const router = createBrowserRouter([
   {
@@ -25,8 +31,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/available-foods",
-        loader: () =>
-          fetch("https://plate-share-api-server-delta.vercel.app/foods"),
+        // loader: () =>
+        //   fetch("https://plate-share-api-server-delta.vercel.app/foods"),
         element: <AvailableFoods></AvailableFoods>,
       },
       {
@@ -54,7 +60,19 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/manage-my-foods",
+        path: "/impact",
+        element: <Impact></Impact>,
+      },
+      {
+        path: "/about",
+        element: <About></About>,
+      },
+      {
+        path: "/contact",
+        element: <Contact></Contact>,
+      },
+      {
+        path: "/my-foods",
         element: (
           <PrivateRoute>
             <MyManageFoods></MyManageFoods>
@@ -84,6 +102,20 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout></DashboardLayout>,
+    children: [
+      {
+        index: true,
+        element: <DashboardHome></DashboardHome>,
+      },
+      {
+        path: "manage-users",
+        element: <ManageUser></ManageUser>,
       },
     ],
   },

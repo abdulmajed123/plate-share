@@ -25,7 +25,7 @@ const Register = () => {
 
       return;
     }
-    console.log({ name, email, photoURL, password });
+    // console.log({ name, email, photoURL, password });
 
     createUser(email, password)
       .then((result) => {
@@ -34,7 +34,7 @@ const Register = () => {
           displayName: name,
           photoURL: photoURL || "https://example.com/default-avatar.png",
         });
-        console.log(user);
+
         Navigate("/");
         toast.success(" User Create Successfully");
       })
