@@ -1,8 +1,6 @@
 import React, { use, useEffect, useState } from "react";
-import { data } from "react-router";
 import { AuthContext } from "../../Provider/AuthContext";
 import Loading from "../Loading/Loading";
-import { div } from "framer-motion/client";
 import FoodRequestCard from "../FoodRequestCard/FoodRequestCard";
 
 const MyFoodsRequest = () => {

@@ -4,6 +4,8 @@ import HowItWorksCard from "../../Component/HowItWorksCard";
 import OurMission from "../../Component/OurMission";
 import FoodsCard from "../../Component/FoodsCard";
 import Loading from "../Loading/Loading";
+import FAQ from "../FAQ/FAQ";
+import Newsletter from "../NewsLetter/NewsLetter";
 
 const Home = () => {
   const [foods, setFoods] = useState([]);
@@ -44,6 +46,12 @@ const Home = () => {
       </section>
       <section>
         <OurMission></OurMission>
+      </section>
+      <section>
+        <FAQ></FAQ>
+      </section>
+      <section>
+        <Newsletter></Newsletter>
       </section>
     </div>
   );

@@ -1,7 +1,7 @@
-import React from "react";
 import {
   FaBook,
   FaExclamationTriangle,
+  FaHandsHelping,
   FaUserCircle,
   FaUsers,
 } from "react-icons/fa";
@@ -9,10 +9,17 @@ import {
   MdAddCircleOutline,
   MdFavoriteBorder,
   MdLibraryBooks,
+  MdOutlineRequestPage,
 } from "react-icons/md";
 import { Link, Outlet } from "react-router";
+import useRole from "../Hook/useRole";
+import foodLogo from "../assets/foodLogo.png";
+import { PiBowlFood } from "react-icons/pi";
 
 const DashboardLayout = () => {
+  const { role } = useRole();
+  console.log(role);
+
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -58,9 +65,16 @@ const DashboardLayout = () => {
           <div className="flex items-center justify-center py-6 border-b border-gray-200 dark:border-gray-700">
             <Link to="/" className="flex items-center gap-2">
               {/* <img src={image} className="w-10 h-auto" alt="Logo" /> */}
-              <span className="text-xl font-bold text-gray-800 dark:text-gray-100">
-                Food Share
-              </span>
+              <div className="flex items-center gap-2">
+                <img
+                  src={foodLogo}
+                  alt="Food Logo"
+                  className="w-12 h-12 rounded-full"
+                />
+                <span className="text-2xl font-bold bg-linear-to-r from-yellow-400 via-red-500 to-pink-500 bg-clip-text text-transparent">
+                  FoodShare
+                </span>
+              </div>
             </Link>
           </div>
 
@@ -87,70 +101,97 @@ const DashboardLayout = () => {
               </Link>
             </li>
 
-            <li>
-              <Link
-                to="/add-food"
-                className="flex items-center gap-4 px-3 py-3 rounded-lg hover:bg-indigo-50 dark:hover:bg-gray-700 transition text-lg text-gray-800 dark:text-gray-200"
-              >
-                <MdAddCircleOutline size={24} />
-                <span>Add Food</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/my-foods"
-                className="flex items-center gap-4 px-3 py-3 rounded-lg hover:bg-indigo-50 dark:hover:bg-gray-700 transition text-lg text-gray-800 dark:text-gray-200"
-              >
-                <MdLibraryBooks size={24} />
-                <span>My Foods</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/my-foods-request"
-                className="flex items-center gap-4 px-3 py-3 rounded-lg hover:bg-indigo-50 dark:hover:bg-gray-700 transition text-lg text-gray-800 dark:text-gray-200"
-              >
-                <MdFavoriteBorder size={24} />
-                <span>My Request Food</span>
-              </Link>
-            </li>
+            {role === "user" && (
+              <>
+                <li>
+                  <Link
+                    to="/dashboard/add-food"
+                    className="flex items-center gap-4 px-3 py-3 rounded-lg hover:bg-indigo-50 dark:hover:bg-gray-700 transition text-lg text-gray-800 dark:text-gray-200"
+                  >
+                    <MdAddCircleOutline size={24} />
+                    <span>Add Food</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/dashboard/my-foods"
+                    className="flex items-center gap-4 px-3 py-3 rounded-lg hover:bg-indigo-50 dark:hover:bg-gray-700 transition text-lg text-gray-800 dark:text-gray-200"
+                  >
+                    <PiBowlFood size={24} />
+                    <span>My Foods</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/dashboard/my-foods-request"
+                    className="flex items-center gap-4 px-3 py-3 rounded-lg hover:bg-indigo-50 dark:hover:bg-gray-700 transition text-lg text-gray-800 dark:text-gray-200"
+                  >
+                    <img
+                      width="22"
+                      height="22"
+                      src="https://img.icons8.com/ios/50/food-donor.png"
+                      alt="food-donor"
+                    />
+                    <span>My Request Food</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/dashboard/user-profile"
+                    className="flex items-center gap-4 px-3 py-3 rounded-lg hover:bg-indigo-50 dark:hover:bg-gray-700 transition text-lg text-gray-800 dark:text-gray-200"
+                  >
+                    <MdFavoriteBorder size={24} />
+                    <span>Profile</span>
+                  </Link>
+                </li>
+              </>
+            )}
 
-            <li>
-              <Link
-                to="/dashboard/manage-users"
-                className="flex items-center gap-4 px-3 py-3 rounded-lg hover:bg-indigo-50 dark:hover:bg-gray-700 transition text-lg text-gray-800 dark:text-gray-200"
-              >
-                <FaUsers size={24} />
-                <span>Manage User</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/dashboard/manage-lesson"
-                className="flex items-center gap-4 px-3 py-3 rounded-lg hover:bg-indigo-50 dark:hover:bg-gray-700 transition text-lg text-gray-800 dark:text-gray-200"
-              >
-                <FaBook size={24} />
-                <span>Manage Foods</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/dashboard/reported-lessons"
-                className="flex items-center gap-4 px-3 py-3 rounded-lg hover:bg-indigo-50 dark:hover:bg-gray-700 transition text-lg text-gray-800 dark:text-gray-200"
-              >
-                <FaExclamationTriangle size={24} />
-                <span>Reported Lessons</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/dashboard/admin-profile"
-                className="flex items-center gap-4 px-3 py-3 rounded-lg hover:bg-indigo-50 dark:hover:bg-gray-700 transition text-lg text-gray-800 dark:text-gray-200"
-              >
-                <FaUserCircle size={24} />
-                <span>Admin Profile</span>
-              </Link>
-            </li>
+            {role === "admin" && (
+              <>
+                <li>
+                  <Link
+                    to="/dashboard/manage-users"
+                    className="flex items-center gap-4 px-3 py-3 rounded-lg hover:bg-indigo-50 dark:hover:bg-gray-700 transition text-lg text-gray-800 dark:text-gray-200"
+                  >
+                    <FaUsers size={24} />
+                    <span>Manage User</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/dashboard/manage-foods"
+                    className="flex items-center gap-4 px-3 py-3 rounded-lg hover:bg-indigo-50 dark:hover:bg-gray-700 transition text-lg text-gray-800 dark:text-gray-200"
+                  >
+                    <PiBowlFood size={24} />
+                    <span>Manage Foods</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/dashboard/request-food"
+                    className="flex items-center gap-4 px-3 py-3 rounded-lg hover:bg-indigo-50 dark:hover:bg-gray-700 transition text-lg text-gray-800 dark:text-gray-200"
+                  >
+                    <img
+                      width="22"
+                      height="22"
+                      src="https://img.icons8.com/ios/50/food-donor.png"
+                      alt="food-donor"
+                    />
+                    <span>Request Food</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/dashboard/admin-profile"
+                    className="flex items-center gap-4 px-3 py-3 rounded-lg hover:bg-indigo-50 dark:hover:bg-gray-700 transition text-lg text-gray-800 dark:text-gray-200"
+                  >
+                    <FaUserCircle size={24} />
+                    <span>Admin Profile</span>
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </aside>
       </div>

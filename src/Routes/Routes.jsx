@@ -15,9 +15,15 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Impact from "../Component/Impact";
 import DashboardLayout from "../LayOuts/DashboardLayOut";
 import ManageUser from "../Pages/Dashboard/ManageUser/ManageUser";
-import DashboardHome from "../Pages/Dashboard/DashboardHome/DashboardHome";
+import DashboardHome from "../Pages/Dashboard/DashboardHome/UserDashboardHome";
 import About from "../Pages/About/About";
 import Contact from "../Pages/Contact/Contact";
+import UserProfile from "../Pages/UserProfile/UserProfile";
+import AdminProfile from "../Pages/AdminProfile/AdminProfile";
+import ManageFoods from "../Pages/Dashboard/ManageFoods/ManageFoods";
+import Dashboard from "../Pages/Dashboard/DashboardHome/Dashboard";
+import RequestFood from "../Pages/RequestFood/RequestFood";
+import PrivacyPolicy from "../Pages/PravacyPolicy/PravacyPolicy";
 
 const router = createBrowserRouter([
   {
@@ -31,17 +37,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/available-foods",
-        // loader: () =>
-        //   fetch("https://plate-share-api-server-delta.vercel.app/foods"),
         element: <AvailableFoods></AvailableFoods>,
       },
       {
         path: "/food-details/:id",
-        element: (
-          <PrivateRoute>
-            <FoodDetails></FoodDetails>
-          </PrivateRoute>
-        ),
+        element: <FoodDetails></FoodDetails>,
         loader: ({ params }) =>
           fetch(
             `https://plate-share-api-server-delta.vercel.app/food-request/${params.id}`
@@ -51,18 +51,17 @@ const router = createBrowserRouter([
         path: "/food-request-table",
         element: <FoodRequestTable></FoodRequestTable>,
       },
-      {
-        path: "/add-food",
-        element: (
-          <PrivateRoute>
-            <AddFoods></AddFoods>
-          </PrivateRoute>
-        ),
-      },
+
       {
         path: "/impact",
         element: <Impact></Impact>,
       },
+
+      {
+        path: "/privacy-policy",
+        element: <PrivacyPolicy></PrivacyPolicy>,
+      },
+
       {
         path: "/about",
         element: <About></About>,
@@ -71,22 +70,7 @@ const router = createBrowserRouter([
         path: "/contact",
         element: <Contact></Contact>,
       },
-      {
-        path: "/my-foods",
-        element: (
-          <PrivateRoute>
-            <MyManageFoods></MyManageFoods>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/my-foods-request",
-        element: (
-          <PrivateRoute>
-            <MyFoodsRequest></MyFoodsRequest>
-          </PrivateRoute>
-        ),
-      },
+
       {
         path: "/update-food/:id",
         element: <UpdateFood></UpdateFood>,
@@ -107,15 +91,52 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout></DashboardLayout>,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
     children: [
       {
         index: true,
-        element: <DashboardHome></DashboardHome>,
+        element: <Dashboard></Dashboard>,
+      },
+
+      {
+        path: "add-food",
+        element: (
+          <PrivateRoute>
+            <AddFoods></AddFoods>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "my-foods-request",
+        element: <MyFoodsRequest></MyFoodsRequest>,
+      },
+      {
+        path: "request-food",
+        element: <RequestFood></RequestFood>,
+      },
+      {
+        path: "my-foods",
+        element: <MyManageFoods></MyManageFoods>,
       },
       {
         path: "manage-users",
         element: <ManageUser></ManageUser>,
+      },
+      {
+        path: "manage-foods",
+        element: <ManageFoods></ManageFoods>,
+      },
+      {
+        path: "user-profile",
+        element: <UserProfile></UserProfile>,
+      },
+      {
+        path: "admin-profile",
+        element: <AdminProfile></AdminProfile>,
       },
     ],
   },

@@ -1,41 +1,16 @@
-// import React, { use } from "react";
-// import { useLoaderData } from "react-router";
-// import FoodsCard from "../../Component/FoodsCard";
-// import { AuthContext } from "../../Provider/AuthContext";
-// import Loading from "../Loading/Loading";
-
-// const AvailableFoods = () => {
-//   const { loading } = use(AuthContext);
-//   const data = useLoaderData();
-
-//   if (loading) {
-//     return <Loading></Loading>;
-//   }
-//   return (
-//     <div className="max-w-5xl mx-auto py-10">
-//       <h2 className="text-4xl font-bold mb-4 text-center  underline">
-//         Available Foods
-//       </h2>
-//       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
-//         {data.map((food) => (
-//           <FoodsCard food={food}></FoodsCard>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default AvailableFoods;
-
 // import React, { useContext, useEffect, useState } from "react";
 // import { AuthContext } from "../../Provider/AuthContext";
 // import Loading from "../Loading/Loading";
 // import FoodsCard from "../../Component/FoodsCard";
 
+// // Frontend sort field → Backend field mapping
 // const sortFieldMap = {
 //   expireDate: "expire_date",
 //   food_quantity: "food_qty",
 // };
+
+// // Backend URL
+// const BASE_URL = "https://plate-share-api-server-delta.vercel.app";
 
 // const AvailableFoods = () => {
 //   const { loading } = useContext(AuthContext);
@@ -63,15 +38,16 @@
 //         const sortParam = sortFieldMap[sort] || "expire_date";
 
 //         const res = await fetch(
-//           `https://plate-share-api-server-delta.vercel.app/foods?search=${search}&location=${location}&sort=${sortParam}&order=${order}&page=${page}&limit=${limit}`,
+//           `${BASE_URL}/foods?search=${search}&location=${location}&sort=${sortParam}&order=${order}&page=${page}&limit=${limit}`,
 //           { signal: controller.signal }
 //         );
 
 //         if (!res.ok) throw new Error("Failed to fetch foods");
 
 //         const data = await res.json();
+//         console.log("Fetched data:", data); // ✅ debug
 
-//         // ✅ Flexible handling: data can be array or {foods,total}
+//         // Flexible handling: backend response can be array or { foods, total }
 //         const foodsArray = Array.isArray(data)
 //           ? data
 //           : Array.isArray(data.foods)
@@ -107,6 +83,7 @@
 //         Available Foods
 //       </h2>
 
+//       {/* Search / Filter / Sort */}
 //       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
 //         <input
 //           type="text"
@@ -118,7 +95,6 @@
 //             setPage(1);
 //           }}
 //         />
-
 //         <input
 //           type="text"
 //           placeholder="Location"
@@ -129,7 +105,6 @@
 //             setPage(1);
 //           }}
 //         />
-
 //         <select
 //           className="select select-bordered"
 //           value={sort}
@@ -141,7 +116,6 @@
 //           <option value="expireDate">Expire Date</option>
 //           <option value="food_quantity">Quantity</option>
 //         </select>
-
 //         <select
 //           className="select select-bordered"
 //           value={order}
@@ -155,8 +129,10 @@
 //         </select>
 //       </div>
 
+//       {/* Error */}
 //       {error && <p className="text-center text-red-500 mb-6">{error}</p>}
 
+//       {/* Food Cards */}
 //       {foods.length === 0 ? (
 //         <p className="text-center text-gray-500">No foods found.</p>
 //       ) : (
@@ -167,6 +143,7 @@
 //         </div>
 //       )}
 
+//       {/* Pagination */}
 //       {totalPages > 1 && (
 //         <div className="flex justify-center mt-10 gap-2 flex-wrap">
 //           {[...Array(totalPages).keys()].map((num) => (
@@ -235,9 +212,8 @@ const AvailableFoods = () => {
         if (!res.ok) throw new Error("Failed to fetch foods");
 
         const data = await res.json();
-        console.log("Fetched data:", data); // ✅ debug
+        console.log("Fetched data:", data);
 
-        // Flexible handling: backend response can be array or { foods, total }
         const foodsArray = Array.isArray(data)
           ? data
           : Array.isArray(data.foods)
@@ -268,7 +244,7 @@ const AvailableFoods = () => {
   const totalPages = Math.ceil(total / limit);
 
   return (
-    <div className="max-w-6xl mx-auto py-10 px-4">
+    <div className="max-w-6xl mx-auto py-10 px-4 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
       <h2 className="text-4xl font-bold mb-6 text-center underline">
         Available Foods
       </h2>
@@ -278,7 +254,7 @@ const AvailableFoods = () => {
         <input
           type="text"
           placeholder="Search food..."
-          className="input input-bordered"
+          className="input input-bordered dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
           value={search}
           onChange={(e) => {
             setSearch(e.target.value);
@@ -288,7 +264,7 @@ const AvailableFoods = () => {
         <input
           type="text"
           placeholder="Location"
-          className="input input-bordered"
+          className="input input-bordered dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
           value={location}
           onChange={(e) => {
             setLocation(e.target.value);
@@ -296,7 +272,7 @@ const AvailableFoods = () => {
           }}
         />
         <select
-          className="select select-bordered"
+          className="select select-bordered dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
           value={sort}
           onChange={(e) => {
             setSort(e.target.value);
@@ -307,7 +283,7 @@ const AvailableFoods = () => {
           <option value="food_quantity">Quantity</option>
         </select>
         <select
-          className="select select-bordered"
+          className="select select-bordered dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
           value={order}
           onChange={(e) => {
             setOrder(e.target.value);
@@ -320,11 +296,17 @@ const AvailableFoods = () => {
       </div>
 
       {/* Error */}
-      {error && <p className="text-center text-red-500 mb-6">{error}</p>}
+      {error && (
+        <p className="text-center text-red-500 dark:text-red-400 mb-6">
+          {error}
+        </p>
+      )}
 
       {/* Food Cards */}
       {foods.length === 0 ? (
-        <p className="text-center text-gray-500">No foods found.</p>
+        <p className="text-center text-gray-500 dark:text-gray-400">
+          No foods found.
+        </p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {foods.map((food) => (

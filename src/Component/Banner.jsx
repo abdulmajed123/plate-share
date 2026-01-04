@@ -105,7 +105,7 @@ const Banner = () => {
   }, []);
 
   return (
-    <section className="relative h-[65vh] w-full overflow-hidden">
+    <section className="relative h-[80vh] w-full overflow-hidden">
       <AnimatePresence mode="wait">
         <motion.div
           key={index}

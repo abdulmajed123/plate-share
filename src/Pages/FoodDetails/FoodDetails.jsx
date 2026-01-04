@@ -1,7 +1,7 @@
 import React, { use, useEffect, useRef, useState } from "react";
 import { useLoaderData, useNavigate, useParams } from "react-router";
 import { AuthContext } from "../../Provider/AuthContext";
-import FoodRequestTable from "../foodRequestTable/FoodRequestTable";
+// import FoodRequestTable from "../foodRequestTable/FoodRequestTable";
 import { toast } from "react-toastify";
 
 const FoodDetails = () => {
